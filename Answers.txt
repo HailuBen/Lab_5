@@ -1,7 +1,36 @@
 #### Part 1 ####
+Note: My Windows WiFi driver does not support monitor mode, which is required to capture 802.11 management frames live. 
+I completed Part 1 using an official sample capture file from the Wireshark project wiki (wpa-Induction.pcap). The frame analysis and screenshots are based on this real 802.11 capture.
+
 SSID: Coherer
 Beacon Interval: 0.102400 [Seconds]
 
-MAC Address 1:
-MAC Address 2:
-MAC Address 3:
+ADDRESS                 |   ROLE
+01:80:c2:00:00:00	    | Receiver 
+00:0c:41:82:b2:55	    | Transmitter 
+01:80:c2:00:00:00	    | Destination/Router/Gateway MAC 
+
+
+#### Lab Questions ####
+1.	3-Address Logic: Based on Part 1, why does an 802.11 frame require a "Third Address" (Address 3) while a standard wired Ethernet frame only uses two?
+
+In 802.11 the Access Point is sort of like a relay between the wireless client and the wired network. In wired Ethernet connections, a frame would travel from one device to another on the same physical cable or switch. That kind of connection only requires 2 addresses of a sender and receiver. Since there is an extra stop for WiFi connections (Access Point), a frame needs to track the reciever, the transmitter, and the router/gateway. 
+
+
+2.	Encapsulation: In your Wireshark capture of the ncat traffic, click on the "Data" portion of the packet. How many bytes of overhead (Headers) were added by the UDP and IP layers combined?
+
+IP Header: 20 bytes
+UDP Header: 8 byyes
+
+Total Overhead: 28 bytes
+
+
+3.	Java Objects: What is the specific purpose of the DatagramPacket object compared to the DatagramSocket object?
+
+DreamSocket is the endpoint and represents the port binding. It handles sending and receiving data through the OS network stack.
+DatagramPacket is the data container. It holds the payload bytes and destination/source IP address and port. The socket does the work and the packet carries the message and address info.
+
+
+4.	Wireless Impact: According to the Chapter 7 lecture slides, why does TCP's performance drop on wireless links when bit errors occur, even if there is no actual network congestion? (Hint: Look at the "Impact on higher-layer protocols" slide).
+
+Packets can get corrupted when bit errors occur on a wireless link. There also might be delays caused by link layer reattempting those transmissions. These lost packets are then interpreted by TCP as network congestion which then triggers a congestion control mechanism which causes a decrease in the congestion window and slows down transmission rate. Since the loss was caused by wireless errors and not actual congestion, the slowdown is unwarranted and leads to degraded throughput. Because bandiwth is already a scarce resource on wiresless links, this is even more damaging performance. 
