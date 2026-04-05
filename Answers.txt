@@ -1,0 +1,7 @@
+#### Part 1 ####
+SSID: Coherer
+Beacon Interval: 0.102400 [Seconds]
+
+MAC Address 1:
+MAC Address 2:
+MAC Address 3:
