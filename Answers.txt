@@ -5,10 +5,11 @@ I completed Part 1 using an official sample capture file from the Wireshark proj
 SSID: Coherer
 Beacon Interval: 0.102400 [Seconds]
 
-ADDRESS                 |   ROLE
-01:80:c2:00:00:00	    | Receiver 
-00:0c:41:82:b2:55	    | Transmitter 
-01:80:c2:00:00:00	    | Destination/Router/Gateway MAC 
+ADDRESS              | ROLE
+---------------------|------------------------------------------
+09:00:07:ff:ff:ff    | Receiver / Destination (AppleTalk broadcast)
+00:0c:41:82:b2:55    | Transmitter / BSS Id (Access Point - CiscoLinksys)
+00:0d:93:82:36:3a    | Source (Client Device - Apple)
 
 
 #### Lab Questions ####
@@ -27,10 +28,10 @@ Total Overhead: 28 bytes
 
 3.	Java Objects: What is the specific purpose of the DatagramPacket object compared to the DatagramSocket object?
 
-DreamSocket is the endpoint and represents the port binding. It handles sending and receiving data through the OS network stack.
+DatagramSocket is the endpoint and represents the port binding. It handles sending and receiving data through the OS network stack.
 DatagramPacket is the data container. It holds the payload bytes and destination/source IP address and port. The socket does the work and the packet carries the message and address info.
 
 
 4.	Wireless Impact: According to the Chapter 7 lecture slides, why does TCP's performance drop on wireless links when bit errors occur, even if there is no actual network congestion? (Hint: Look at the "Impact on higher-layer protocols" slide).
 
-Packets can get corrupted when bit errors occur on a wireless link. There also might be delays caused by link layer reattempting those transmissions. These lost packets are then interpreted by TCP as network congestion which then triggers a congestion control mechanism which causes a decrease in the congestion window and slows down transmission rate. Since the loss was caused by wireless errors and not actual congestion, the slowdown is unwarranted and leads to degraded throughput. Because bandiwth is already a scarce resource on wiresless links, this is even more damaging performance. 
+Packets can get corrupted when bit errors occur on a wireless link. There also might be delays caused by link layer reattempting those transmissions. These lost packets are then interpreted by TCP as network congestion which then triggers a congestion control mechanism which causes a decrease in the congestion window and slows down transmission rate. Since the loss was caused by wireless errors and not actual congestion, the slowdown is unwarranted and leads to degraded throughput. Because bandiwth is already a scarce resource on wiresless links, this is even more damaging to performance. 
